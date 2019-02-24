@@ -1,2 +1,3 @@
-# LabJS_VIII
+# Frontend Development
+
 Laboratoria z Frontend Development, semestr VIII
