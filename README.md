@@ -1,4 +1,4 @@
-# Laboratorium z Frontend Development, semestr VIII
+# Laboratorium z Frontend Development, VIII semestr
 
 Prowadzący: **dr Jakub Neumann**  
 Student: **Tomasz Adamczyk**, nr indeksu **243217**  
