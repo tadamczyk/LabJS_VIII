@@ -73,12 +73,12 @@ showTeam(1);
 // UPDATE
 var updateTeam = function (id, name, city, country, yearOfEstablished, isExists, players) {
   var team = premierLeague[id];
-  if (typeof (name) !== "undefined") team.name = name;
-  if (typeof (city) !== "undefined") team.city = city;
-  if (typeof (country) !== "undefined") team.country = country;
-  if (typeof (yearOfEstablished) !== "undefined") team.yearOfEstablished = yearOfEstablished;
-  if (typeof (isExists) !== "undefined") team.isExists = isExists;
-  if (typeof (players) !== "undefined") team.players = players;
+  if (name) team.name = name;
+  if (city) team.city = city;
+  if (country) team.country = country;
+  if (yearOfEstablished) team.yearOfEstablished = yearOfEstablished;
+  if (isExists) team.isExists = isExists;
+  if (players) team.players = players;
 };
 
 updateTeam(0, 'Fulham');
@@ -97,9 +97,8 @@ showTeams();
 var findByName = function (name) {
   console.log('All teams with name ' + name + ':');
   return premierLeague.filter(team => team.name == name);
-};
-
-console.log(findByName('Chelsea'));
+}
+console.log(findByName('Fulham'));
 console.log();
 
 var findByCity = function (city) {
@@ -108,5 +107,12 @@ var findByCity = function (city) {
 };
 
 console.log(findByCity('London'));
-console.log(findByCity('Madrid'));
+console.log();
+
+var findByCountry = function (country) {
+  console.log('All teams from ' + country + ':');
+  return premierLeague.filter(team => team.country == country);
+};
+
+console.log(findByCity('England'));
 console.log();
