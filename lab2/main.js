@@ -1,4 +1,4 @@
-// Prepare init data
+// Preparing initialize data...
 var arsenal = {
   name: 'Arsenal',
   city: 'London',
@@ -17,9 +17,9 @@ var tottenham = {
   players: ['Lloris', 'Vorm']
 };
 
-// Add created teams to league
+// Adding created teams to new league...
 var premierLeague = [arsenal, tottenham];
-console.log('Init list of teams from Premier League:');
+console.log('List of teams from Premier League:');
 console.log(premierLeague);
 console.log();
 
@@ -36,9 +36,9 @@ var createTeam = function (name, city, country, yearOfEstablished, isExists, pla
   };
 };
 
-var addTeam = function (item) {
-  console.log('ADDED TEAM - ' + item.name);
-  premierLeague.push(item);
+var addTeam = function (team) {
+  console.log('ADDED TEAM - ' + team.name);
+  premierLeague.push(team);
 };
 
 var chelsea = createTeam('Chelsea', 'London', 'England', 1905, true, ['Kepa', 'Caballero']);
@@ -50,29 +50,30 @@ console.log();
 // READ
 var showTeams = function () {
   console.log('PREMIER LEAGUE TEAMS:');
-  premierLeague.forEach(function (item) {
-    console.log(item.name, item.city, ',', item.country);
+  premierLeague.forEach(function (team) {
+    console.log(team.name, team.city, ',', team.country);
   });
   console.log();
 };
 
 showTeams();
 
-var showTeam = function (id) {
-  console.log('TEAM ' + id + ':');
-  console.log('Name: ' + premierLeague[id].name);
-  console.log('City: ' + premierLeague[id].city);
-  console.log('Country: ' + premierLeague[id].country);
-  console.log('Year of established: ' + premierLeague[id].yearOfEstablished);
-  console.log('Players: ' + premierLeague[id].players);
+var showTeam = function (index) {
+  console.log('TEAM ' + index + ':');
+  console.log('Name: ' + premierLeague[index].name);
+  console.log('City: ' + premierLeague[index].city);
+  console.log('Country: ' + premierLeague[index].country);
+  console.log('Year of established: ' + premierLeague[index].yearOfEstablished);
+  console.log('Players: ' + premierLeague[index].players);
   console.log();
 };
 
 showTeam(1);
 
 // UPDATE
-var updateTeam = function (id, name, city, country, yearOfEstablished, isExists, players) {
-  var team = premierLeague[id];
+var updateTeam = function (index, name, city, country, yearOfEstablished, isExists, players) {
+  var team = premierLeague[index];
+  console.log('UPDATED TEAM - ' + team.name);
   if (name) team.name = name;
   if (city) team.city = city;
   if (country) team.country = country;
@@ -86,8 +87,9 @@ updateTeam(0, 'Fulham');
 showTeam(0);
 
 // DELETE
-var deleteTeam = function (id) {
-  premierLeague.splice(id, 1);
+var deleteTeam = function (index) {
+  console.log('DELETED TEAM - ' + premierLeague[index].name);
+  premierLeague.splice(index);
 };
 
 deleteTeam(1);
