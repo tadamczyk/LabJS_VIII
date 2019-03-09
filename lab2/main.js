@@ -118,3 +118,21 @@ var findByCountry = function (country) {
 
 console.log(findByCity('England'));
 console.log();
+
+var findByYearOfEstablished = function (yearOfEstablished) {
+  console.log('All teams established in ' + yearOfEstablished + ':');
+  return premierLeague.filter(team => team.yearOfEstablished == yearOfEstablished);
+}
+
+console.log(findByYearOfEstablished(1892));
+console.log();
+
+var filterByYearOfEstablished = function (yearOfEstablished, isExists) {
+  console.log('All exist teams which was establish in or after ' + yearOfEstablished + ':');
+  return premierLeague.find(function(team) {
+    return team.yearOfEstablished >= yearOfEstablished && team.isExists == true;
+  });
+}
+
+console.log(filterByYearOfEstablished(1880));
+console.log();
