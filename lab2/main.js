@@ -129,7 +129,7 @@ console.log();
 
 var filterByYearOfEstablished = function (yearOfEstablished, isExists) {
   console.log('All exist teams which was establish in or after ' + yearOfEstablished + ':');
-  return premierLeague.find(function(team) {
+  return premierLeague.find(function (team) {
     return team.yearOfEstablished >= yearOfEstablished && team.isExists == true;
   });
 }
