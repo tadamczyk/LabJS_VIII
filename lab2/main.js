@@ -4,7 +4,7 @@ var arsenal = {
   city: 'London',
   country: 'England',
   yearOfEstablished: 1892,
-  isExists: true,
+  inCurrentSeason: true,
   players: ['Cech', 'Leno']
 };
 
@@ -13,7 +13,7 @@ var tottenham = {
   city: 'London',
   country: 'England',
   yearOfEstablished: 1882,
-  isExists: true,
+  inCurrentSeason: true,
   players: ['Lloris', 'Vorm']
 };
 
@@ -78,7 +78,7 @@ var updateTeamParameters = function (index, name, city, country, yearOfEstablish
   if (city) team.city = city;
   if (country) team.country = country;
   if (yearOfEstablished) team.yearOfEstablished = yearOfEstablished;
-  if (isExists) team.isExists = isExists;
+  if (isExists) team.inCurrentSeason = isExists;
   if (players) team.players = players;
 };
 
@@ -142,7 +142,7 @@ console.log();
 var filterByYearOfEstablished = function (yearOfEstablished, isExists) {
   console.log('All exist teams which was establish in or after ' + yearOfEstablished + ':');
   return premierLeague.find(function (team) {
-    return team.yearOfEstablished >= yearOfEstablished && team.isExists == true;
+    return team.yearOfEstablished >= yearOfEstablished && team.inCurrentSeason == true;
   });
 };
 
