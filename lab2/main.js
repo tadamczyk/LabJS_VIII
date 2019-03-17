@@ -98,14 +98,18 @@ showTeams();
 // FIND
 var findByName = function (name) {
   console.log('All teams with name ' + name + ':');
-  return premierLeague.filter(team => team.name == name);
-}
+  return premierLeague.filter(function (team) {
+    return team.name == name;
+  });
+};
 console.log(findByName('Fulham'));
 console.log();
 
 var findByCity = function (city) {
   console.log('All teams from ' + city + ':');
-  return premierLeague.filter(team => team.city == city);
+  return premierLeague.filter(function (team) {
+    return team.city == city;
+  });
 };
 
 console.log(findByCity('London'));
@@ -113,7 +117,9 @@ console.log();
 
 var findByCountry = function (country) {
   console.log('All teams from ' + country + ':');
-  return premierLeague.filter(team => team.country == country);
+  return premierLeague.filter(function (team) {
+    return team.country == country;
+  });
 };
 
 console.log(findByCity('England'));
@@ -121,8 +127,10 @@ console.log();
 
 var findByYearOfEstablished = function (yearOfEstablished) {
   console.log('All teams established in ' + yearOfEstablished + ':');
-  return premierLeague.filter(team => team.yearOfEstablished == yearOfEstablished);
-}
+  return premierLeague.filter(function (team) {
+    return team.yearOfEstablished == yearOfEstablished;
+  });
+};
 
 console.log(findByYearOfEstablished(1892));
 console.log();
@@ -132,7 +140,7 @@ var filterByYearOfEstablished = function (yearOfEstablished, isExists) {
   return premierLeague.find(function (team) {
     return team.yearOfEstablished >= yearOfEstablished && team.isExists == true;
   });
-}
+};
 
 console.log(filterByYearOfEstablished(1880));
 console.log();
