@@ -71,7 +71,7 @@ var showTeam = function (index) {
 showTeam(1);
 
 // UPDATE
-var updateTeam = function (index, name, city, country, yearOfEstablished, isExists, players) {
+var updateTeamParameters = function (index, name, city, country, yearOfEstablished, isExists, players) {
   var team = premierLeague[index];
   console.log('UPDATED TEAM - ' + team.name);
   if (name) team.name = name;
@@ -82,7 +82,11 @@ var updateTeam = function (index, name, city, country, yearOfEstablished, isExis
   if (players) team.players = players;
 };
 
-updateTeam(0, 'Fulham');
+var updateTeam = function (index, team) {
+  premierLeague[index] = team;
+};
+
+updateTeamParameters(0, 'Fulham');
 
 showTeam(0);
 
