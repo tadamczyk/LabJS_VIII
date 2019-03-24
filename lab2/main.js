@@ -4,7 +4,7 @@ var arsenal = {
   city: 'London',
   country: 'England',
   yearOfEstablished: 1892,
-  inCurrentSeason: true,
+  inPremierLeague: true,
   players: ['Cech', 'Leno']
 };
 
@@ -13,7 +13,7 @@ var tottenham = {
   city: 'London',
   country: 'England',
   yearOfEstablished: 1882,
-  inCurrentSeason: true,
+  inPremierLeague: true,
   players: ['Lloris', 'Vorm']
 };
 
@@ -24,14 +24,14 @@ console.log(premierLeague);
 console.log();
 
 // CREATE
-var createTeam = function (name, city, country, yearOfEstablished, isExists, players) {
+var createTeam = function (name, city, country, yearOfEstablished, inPremierLeague, players) {
   console.log('CREATED TEAM - ' + name);
   return {
     name: name,
     city: city,
     country: country,
     yearOfEstablished: yearOfEstablished,
-    isExists: isExists,
+    inPremierLeague: inPremierLeague,
     players: players
   };
 };
@@ -78,11 +78,12 @@ var updateTeamParameters = function (index, name, city, country, yearOfEstablish
   if (city) team.city = city;
   if (country) team.country = country;
   if (yearOfEstablished) team.yearOfEstablished = yearOfEstablished;
-  if (isExists) team.inCurrentSeason = isExists;
+  if (isExists) team.inPremierLeague = isExists;
   if (players) team.players = players;
 };
 
 var updateTeam = function (index, team) {
+  console.log('UPDATED TEAM - ' + team.name);
   premierLeague[index] = team;
 };
 
@@ -91,12 +92,12 @@ updateTeamParameters(0, 'Fulham');
 showTeam(0);
 
 // DELETE
-var deleteTeam = function (index) {
+var deleteTeamById = function (index) {
   console.log('DELETED TEAM - ' + premierLeague[index].name);
   premierLeague.splice(index);
 };
 
-deleteTeam(1);
+deleteTeamById(1);
 showTeams();
 
 // FIND
@@ -142,7 +143,7 @@ console.log();
 var filterByYearOfEstablished = function (yearOfEstablished, isExists) {
   console.log('All exist teams which was establish in or after ' + yearOfEstablished + ':');
   return premierLeague.find(function (team) {
-    return team.yearOfEstablished >= yearOfEstablished && team.inCurrentSeason == true;
+    return team.yearOfEstablished >= yearOfEstablished && team.inPremierLeague == true;
   });
 };
 
