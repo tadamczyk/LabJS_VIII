@@ -73,7 +73,13 @@ var premierLeague = (function () {
     showTeams: showTeams,
     showTeam: showTeam,
     updateTeam: updateTeam,
-    deleteTeam: deleteTeam
+    deleteTeam: deleteTeam,
+    squadSize: function (teamName) {
+      var team = teams.find(function (team) {
+        return team.name == teamName;
+      });
+      console.log('SQUAD SIZE IN ' + teamName + ': ' + team.players.length);
+    }
   };
 
 })();
@@ -82,6 +88,23 @@ var premierLeague = (function () {
 premierLeague.addTeam(tottenham);
 premierLeague.showTeams();
 premierLeague.showTeam('Arsenal');
+premierLeague.squadSize('Arsenal');
 premierLeague.updateTeam('Arsenal', { name: 'Chelsea', city: 'London', country: 'England', yearOfEstablished: '1895', inCurrentSeason: true });
 premierLeague.deleteTeam('Tottenham');
 premierLeague.showTeams();
+
+// Inheritance...
+function Team(name, city, country, yearOfEstablished, inCurrentSeason, players) {
+  this.name = name;
+  this.city = city;
+  this.country = country;
+  this.yearOfEstablished = yearOfEstablished;
+  this.inCurrentSeason = inCurrentSeason;
+  this.players = players;
+};
+
+function YouthTeam(name, city, country, yearOfEstablished, inCurrentSeason, players, ageCategory) {
+  Team.call(this, name, city, country, yearOfEstablished, inCurrentSeason, players);
+
+  this.ageCategory = ageCategory;
+};
