@@ -84,15 +84,6 @@ var premierLeague = (function () {
 
 })();
 
-// Tests...
-premierLeague.addTeam(tottenham);
-premierLeague.showTeams();
-premierLeague.showTeam('Arsenal');
-premierLeague.squadSize('Arsenal');
-premierLeague.updateTeam('Arsenal', { name: 'Chelsea', city: 'London', country: 'England', yearOfEstablished: '1895', inCurrentSeason: true });
-premierLeague.deleteTeam('Tottenham');
-premierLeague.showTeams();
-
 // Inheritance...
 function Team(name, city, country, yearOfEstablished, inCurrentSeason, players) {
   this.name = name;
@@ -108,3 +99,59 @@ function YouthTeam(name, city, country, yearOfEstablished, inCurrentSeason, play
 
   this.ageCategory = ageCategory;
 };
+
+// Prototype and constructr...
+
+Team.prototype = {
+  getFullName: function () {
+    return this.name + ' ' + this.city;
+  },
+  getCountry: function () {
+    return this.country;
+  }
+};
+
+Team.prototype.getPlayers = function () {
+  console.log('All players in team ' + this.name + ':');
+  console.log(this.players);
+};
+
+Team.prototype.setInCurrentSeason = function (inCurrentSeason) {
+  this.inCurrentSeason = inCurrentSeason;
+};
+
+YouthTeam.prototype = Object.create(Team.prototype);
+YouthTeam.prototype.constructor = YouthTeam;
+
+YouthTeam.prototype.getAgeCategory = function () {
+  return this.ageCategory;
+};
+
+YouthTeam.prototype.setAgeCategory = function (ageCategory) {
+  this.ageCategory = ageCategory;
+};
+
+var arsenalYouthTeam = new YouthTeam(
+  'Arsenal',
+  'London',
+  'England',
+  2000,
+  false,
+  ["Bielik", "Nelson"],
+  "U21"
+);
+
+// Tests...
+premierLeague.addTeam(tottenham);
+premierLeague.showTeams();
+premierLeague.showTeam('Arsenal');
+premierLeague.squadSize('Arsenal');
+premierLeague.updateTeam('Arsenal', { name: 'Chelsea', city: 'London', country: 'England', yearOfEstablished: '1895', inCurrentSeason: true });
+premierLeague.deleteTeam('Tottenham');
+premierLeague.showTeams();
+
+console.log('Display info about new youth team:');
+console.log(arsenalYouthTeam.getFullName());
+console.log(arsenalYouthTeam.getCountry());
+arsenalYouthTeam.getPlayers();
+console.log(arsenalYouthTeam.getAgeCategory());
