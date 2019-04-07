@@ -100,7 +100,7 @@ function YouthTeam(name, city, country, yearOfEstablished, inCurrentSeason, play
   this.ageCategory = ageCategory;
 };
 
-// Prototype and constructr...
+// Prototype and constructor...
 
 Team.prototype = {
   getFullName: function () {
