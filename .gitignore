@@ -81,4 +81,4 @@ typings/
 .dynamodb/
 
 # lib dir
-.lib/
+lib/
