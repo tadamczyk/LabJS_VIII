@@ -38,54 +38,48 @@ class PremierLeague {
   };
 
   addTeam(team) {
-    console.log(`ADDED TEAM - ${team.name}`);
     this.teams.push(team);
-    console.log();
+    return `ADDED TEAM - ${team.name}`;
   };
 
   showTeams() {
-    console.log('PREMIER LEAGUE TEAMS:');
-    this.teams.forEach(team => {
-      console.log(team.name, team.city, ',', team.country);
-    });
-    console.log();
+    return 'PREMIER LEAGUE TEAMS:\n' +
+      this.teams.map(team => {
+        return `${team.name} ${team.city}, ${team.country}\n`;
+      }).join('');
   };
 
   showTeam(name) {
-    console.log(`TEAM ${name}:`);
     const teamToDisplay = this.teams.find(team => {
       return team.name == name;
     });
-    console.log(`Name: ${teamToDisplay.name}`);
-    console.log(`City: ${teamToDisplay.city}`);
-    console.log(`Country: ${teamToDisplay.country}`);
-    console.log(`Year of established: ${teamToDisplay.yearOfEstablished}`);
-    console.log(`Players: ${teamToDisplay.players}`);
-    console.log();
+    return `TEAM ${name}:` +
+      `City: ${teamToDisplay.city}` +
+      `Country: ${teamToDisplay.country}` +
+      `Year of established: ${teamToDisplay.yearOfEstablished}` +
+      `Players: ${teamToDisplay.players}`;
   };
 
   updateTeam(oldTeamName, newTeam) {
-    console.log(`UPDATED TEAM - ${oldTeamName}`);
     let oldTeam = this.teams.find(team => {
       return team.name == oldTeamName;
     });
     const id = this.teams.indexOf(oldTeam);
     this.teams[id] = newTeam;
-    console.log();
+    return `UPDATED TEAM - ${oldTeamName}`;
   };
 
   deleteTeam(name) {
-    console.log(`DELETED TEAM - ${name}`);
     let teamToDelete = this.teams.find(team => {
       return team.name == name;
     });
     const id = this.teams.indexOf(teamToDelete);
     this.teams.splice(id);
-    console.log();
+    return `DELETED TEAM - ${name}`;
   };
 }
 
 let premierLeague = new PremierLeague([arsenal]);
-premierLeague.addTeam(tottenham);
-premierLeague.showTeams();
+console.log(premierLeague.addTeam(tottenham));
+console.log(premierLeague.showTeams());
 console.log(premierLeague.teams);

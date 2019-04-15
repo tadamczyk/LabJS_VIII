@@ -22,50 +22,40 @@ var premierLeague = (function () {
   var teams = [arsenal];
 
   var addTeam = function (team) {
-    console.log('ADDED TEAM - ' + team.name);
     teams.push(team);
-    console.log();
+    return 'ADDED TEAM - ' + team.name;
   };
 
   var showTeams = function () {
-    console.log('PREMIER LEAGUE TEAMS:');
-    teams.forEach(function (team) {
-      console.log(team.name, team.city, ',', team.country);
-    });
-    console.log();
+    return 'PREMIER LEAGUE TEAMS:\n' +
+      teams.map(function (team) {
+        return team.name + ' ' + team.city + ', ' + team.country + '\n';
+      }).join('');
   };
 
   var showTeam = function (name) {
-    console.log('TEAM ' + name + ':');
     var teamToDisplay = teams.find(function (team) {
       return team.name == name;
     });
-    console.log('Name: ' + teamToDisplay.name);
-    console.log('City: ' + teamToDisplay.city);
-    console.log('Country: ' + teamToDisplay.country);
-    console.log('Year of established: ' + teamToDisplay.yearOfEstablished);
-    console.log('Players: ' + teamToDisplay.players);
-    console.log();
+    return 'TEAM - ' + teamToDisplay.name + ' ' + teamToDisplay.city + ', ' + teamToDisplay.country + '\n' + teamToDisplay.yearOfEstablished;
   };
 
   var updateTeam = function (oldTeamName, newTeam) {
-    console.log('UPDATED TEAM - ' + oldTeamName);
     var oldTeam = teams.find(function (team) {
       return team.name == oldTeamName;
     });
     var id = teams.indexOf(oldTeam);
     teams[id] = newTeam;
-    console.log();
+    return 'UPDATED TEAM - ' + oldTeamName;
   };
 
   var deleteTeam = function (name) {
-    console.log('DELETED TEAM - ' + name);
     var teamToDelete = teams.find(function (team) {
       return team.name == name;
     });
     var id = teams.indexOf(teamToDelete);
     teams.splice(id);
-    console.log();
+    return 'DELETED TEAM - ' + name;
   };
 
   return {
@@ -78,7 +68,7 @@ var premierLeague = (function () {
       var team = teams.find(function (team) {
         return team.name == teamName;
       });
-      console.log('SQUAD SIZE IN ' + teamName + ': ' + team.players.length);
+      return 'SQUAD SIZE IN ' + teamName + ': ' + team.players.length;
     }
   };
 
@@ -112,8 +102,7 @@ Team.prototype = {
 };
 
 Team.prototype.getPlayers = function () {
-  console.log('All players in team ' + this.name + ':');
-  console.log(this.players);
+  return 'All players in team ' + this.name + ':\n' + this.players;
 };
 
 Team.prototype.setInCurrentSeason = function (inCurrentSeason) {
@@ -142,13 +131,13 @@ var arsenalYouthTeam = new YouthTeam(
 );
 
 // Tests...
-premierLeague.addTeam(tottenham);
-premierLeague.showTeams();
-premierLeague.showTeam('Arsenal');
-premierLeague.squadSize('Arsenal');
-premierLeague.updateTeam('Arsenal', { name: 'Chelsea', city: 'London', country: 'England', yearOfEstablished: '1895', inCurrentSeason: true });
-premierLeague.deleteTeam('Tottenham');
-premierLeague.showTeams();
+console.log(premierLeague.addTeam(tottenham));
+console.log(premierLeague.showTeams());
+console.log(premierLeague.showTeam('Arsenal'));
+console.log(premierLeague.squadSize('Arsenal'));
+console.log(premierLeague.updateTeam('Arsenal', { name: 'Chelsea', city: 'London', country: 'England', yearOfEstablished: '1895', inCurrentSeason: true }));
+console.log(premierLeague.deleteTeam('Tottenham'));
+console.log(premierLeague.showTeams());
 
 console.log('Display info about new youth team:');
 console.log(arsenalYouthTeam.getFullName());
