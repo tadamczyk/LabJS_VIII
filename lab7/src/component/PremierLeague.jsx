@@ -36,7 +36,6 @@ export default class PremierLeague extends Component {
   render() {
     return (
       <div className="premierLeague">
-        <h2>{this.title}</h2>
         <TeamsBox teams={this.state.teams} />
         <TeamDetailsBox team={this.state.teams[this.state.currentTeam]} />
       </div>
