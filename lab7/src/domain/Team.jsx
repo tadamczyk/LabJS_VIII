@@ -7,4 +7,4 @@ export default class Team {
     this.inCurrentSeason = inCurrentSeason;
     this.players = players;
   };
-};
+}

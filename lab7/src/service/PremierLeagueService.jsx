@@ -1,11 +1,6 @@
-import Team from "../domain/Team.jsx";
-
-export class PremierLeagueService {
+export default class PremierLeagueService {
   constructor() {
     this.teams = [];
-    this.addTeam(new Team('Arsenal', 'London', 'England', 1892, true, ['Cech', 'Leno']));
-    this.addTeam(new Team('Chelsea', 'London', 'England', 1905, true, ['Kepa', 'Caballero']));
-    this.addTeam(new Team('Tottenham', 'London', 'England', 1882, true, ['Lloris', 'Vorm']));
   };
 
   set teams(value) {
@@ -16,13 +11,25 @@ export class PremierLeagueService {
     return this._teams;
   };
 
-  showTeam = (name) => {
-    return this._teams.find(team => {
-      return team.name === name;
-    });
+  getTeamById = (id) => {
+    return this._teams.find(team => team.id === id);
   };
 
-  addTeam = (team) => {
+  getTeamByName = (name) => {
+    return this._teams.find(team => team.name === name);
+  };
+
+  insert = (team) => {
     this._teams.push(team);
-  }
+  };
+
+  update = (id, team) => {
+    let teamId = this._teams.findIndex(team => team.id === id);
+    this._teams[teamId] = team;
+  };
+
+  delete = (id) => {
+    let teamId = this._teams.findIndex(team => team.id === id);
+    this._teams.splice(teamId, 1);
+  };
 }

@@ -1,41 +1,45 @@
 import React, { Component } from 'react';
-import { PremierLeagueTeams } from './PremierLeagueTeams.jsx';
-import { TeamDetail } from './TeamDetail.jsx';
-import { PremierLeagueService } from '../service/PremierLeagueService.jsx';
+import Team from '../domain/Team.jsx';
+import TeamsBox from './TeamsBox.jsx';
+import TeamDetailsBox from './TeamDetailsBox.jsx';
+import PremierLeagueService from '../service/PremierLeagueService.jsx';
 
 export default class PremierLeague extends Component {
   constructor(props) {
     super(props);
 
     this.premierLeagueService = new PremierLeagueService();
+    this.premierLeagueService.insert(new Team('Arsenal', 'London', 'England', 1892, true, ['Cech', 'Leno']));
+    this.premierLeagueService.insert(new Team('Tottenham', 'London', 'England', 1882, true, ['Lloris', 'Vorm']));
+    this.premierLeagueService.insert(new Team('Chelsea', 'London', 'England', 1905, true, ['Kepa', 'Caballero']));
+
     this.state = {
       teams: this.premierLeagueService.teams,
-      activeTeam: 0
-    }
-  }
-
+      currentTeam: 0
+    };
+  };
 
   tick() {
     this.setState({
-      activeTeam: (this.state.activeTeam + 1) % this.state.teams.length
-    })
-  }
+      currentTeam: (this.state.currentTeam + 1) % this.state.teams.length
+    });
+  };
 
   componentDidMount() {
-    this.timerId = setInterval(() => this.tick(), 2000);
-  }
+    this.timerId = setInterval(() => this.tick(), 3000);
+  };
 
   componentWillUnmount() {
     clearInterval(this.timerId);
-  }
+  };
 
   render() {
     return (
       <div className="premierLeague">
         <h2>{this.title}</h2>
-        <PremierLeagueTeams teams={this.state.teams} />
-        <TeamDetail team={this.state.teams[this.state.activeTeam]} />
+        <TeamsBox teams={this.state.teams} />
+        <TeamDetailsBox team={this.state.teams[this.state.currentTeam]} />
       </div>
-    )
-  }
+    );
+  };
 }
