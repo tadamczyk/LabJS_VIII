@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 export default class TeamDetailsBox extends Component {
   render() {
@@ -8,5 +8,5 @@ export default class TeamDetailsBox extends Component {
         <p>{Object.keys(this.props.team).map(field => <p>{field}: {this.props.team[field]}</p>)}</p>
       </div>
     );
-  }
+  };
 }

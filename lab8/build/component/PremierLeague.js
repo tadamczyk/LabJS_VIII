@@ -7,13 +7,13 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _Team = _interopRequireDefault(require("../domain/Team.jsx"));
+var _TeamsBox = _interopRequireDefault(require("./TeamsBox"));
 
-var _TeamsBox = _interopRequireDefault(require("./TeamsBox.jsx"));
+var _TeamDetailsBox = _interopRequireDefault(require("./TeamDetailsBox"));
 
-var _TeamDetailsBox = _interopRequireDefault(require("./TeamDetailsBox.jsx"));
+var _PremierLeagueService = _interopRequireDefault(require("../service/PremierLeagueService"));
 
-var _PremierLeagueService = _interopRequireDefault(require("../service/PremierLeagueService.jsx"));
+var _FakePremierLeague = require("../fake/FakePremierLeague");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -49,15 +49,8 @@ function (_Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(PremierLeague).call(this, props));
     _this.premierLeagueService = new _PremierLeagueService.default();
-
-    _this.premierLeagueService.insert(new _Team.default('Arsenal', 'London', 'England', 1892, true, ['Cech', 'Leno']));
-
-    _this.premierLeagueService.insert(new _Team.default('Tottenham', 'London', 'England', 1882, true, ['Lloris', 'Vorm']));
-
-    _this.premierLeagueService.insert(new _Team.default('Chelsea', 'London', 'England', 1905, true, ['Kepa', 'Caballero']));
-
     _this.state = {
-      teams: _this.premierLeagueService.teams,
+      teams: _FakePremierLeague.fakeTeams,
       currentTeam: 0
     };
     return _this;

@@ -8,4 +8,4 @@ var _PremierLeague = _interopRequireDefault(require("./component/PremierLeague.j
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_reactDom.default.render(_react.default.createElement(_PremierLeague.default, null), document.getElementById('root'));
+_reactDom.default.render(_react.default.createElement(_PremierLeague.default, null), document.getElementById("root"));

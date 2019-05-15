@@ -1,20 +1,17 @@
-import React, { Component } from 'react';
-import Team from '../domain/Team.jsx';
-import TeamsBox from './TeamsBox.jsx';
-import TeamDetailsBox from './TeamDetailsBox.jsx';
-import PremierLeagueService from '../service/PremierLeagueService.jsx';
+import React, { Component } from "react";
+import TeamsBox from "./TeamsBox";
+import TeamDetailsBox from "./TeamDetailsBox";
+import PremierLeagueService from "../service/PremierLeagueService";
+import { fakeTeams } from "../fake/FakePremierLeague";
 
 export default class PremierLeague extends Component {
   constructor(props) {
     super(props);
 
     this.premierLeagueService = new PremierLeagueService();
-    this.premierLeagueService.insert(new Team('Arsenal', 'London', 'England', 1892, true, ['Cech', 'Leno']));
-    this.premierLeagueService.insert(new Team('Tottenham', 'London', 'England', 1882, true, ['Lloris', 'Vorm']));
-    this.premierLeagueService.insert(new Team('Chelsea', 'London', 'England', 1905, true, ['Kepa', 'Caballero']));
 
     this.state = {
-      teams: this.premierLeagueService.teams,
+      teams: fakeTeams,
       currentTeam: 0
     };
   };

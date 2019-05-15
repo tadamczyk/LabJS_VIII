@@ -1,5 +1,6 @@
 export default class Team {
-  constructor(name, city, country, yearOfEstablished, inCurrentSeason, players) {
+  constructor(id, name, city, country, yearOfEstablished, inCurrentSeason, players) {
+    this.id = id;
     this.name = name;
     this.city = city;
     this.country = country;
