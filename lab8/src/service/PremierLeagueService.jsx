@@ -11,24 +11,24 @@ export default class PremierLeagueService {
     return this._teams;
   };
 
-  getTeamById = (id) => {
+  getById(id) {
     return this._teams.find(team => team.id === id);
   };
 
-  getTeamByName = (name) => {
+  getByName(name) {
     return this._teams.find(team => team.name === name);
   };
 
-  insert = (team) => {
+  insert(team) {
     this._teams.push(team);
   };
 
-  update = (id, team) => {
+  update(id, team) {
     let teamId = this._teams.findIndex(team => team.id === id);
     this._teams[teamId] = team;
   };
 
-  delete = (id) => {
+  delete(id) {
     let teamId = this._teams.findIndex(team => team.id === id);
     this._teams.splice(teamId, 1);
   };
