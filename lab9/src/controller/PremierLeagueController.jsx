@@ -1,5 +1,6 @@
 import Express from "express";
 import BodyParser from "body-parser";
+import Cors from "cors";
 import PremierLeagueService from "../service/PremierLeagueService";
 import { fakeTeams } from "../fake/FakePremierLeague";
 
@@ -7,6 +8,7 @@ const service = new PremierLeagueService();
 const host = new Express();
 const port = 3001;
 
+host.use(Cors());
 host.use(BodyParser.json());
 service.teams = fakeTeams;
 
@@ -23,13 +25,6 @@ host.get("/api/team", (request, response) => {
 host.get("/api/team/:id", (request, response) => {
   const id = parseInt(request.params.id);
   const team = service.getById(id);
-  response.header("Content-Type", "application/json");
-  response.send(JSON.stringify(team, null, 2));
-});
-
-host.get("/api/team/:name", (request, response) => {
-  const name = parseInt(request.params.name);
-  const team = service.getByName(name);
   response.header("Content-Type", "application/json");
   response.send(JSON.stringify(team, null, 2));
 });

@@ -7,19 +7,27 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _axios = _interopRequireDefault(require("axios"));
+
+var _AddTeamBox = _interopRequireDefault(require("./AddTeamBox"));
+
+var _Team = _interopRequireDefault(require("../domain/Team"));
+
 var _TeamsBox = _interopRequireDefault(require("./TeamsBox"));
 
 var _TeamDetailsBox = _interopRequireDefault(require("./TeamDetailsBox"));
-
-var _PremierLeagueService = _interopRequireDefault(require("../service/PremierLeagueService"));
-
-var _FakePremierLeague = require("../fake/FakePremierLeague");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -48,10 +56,16 @@ function (_Component) {
     _classCallCheck(this, PremierLeague);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(PremierLeague).call(this, props));
-    _this.premierLeagueService = new _PremierLeagueService.default();
     _this.state = {
-      teams: _FakePremierLeague.fakeTeams,
-      currentTeam: 0
+      teams: [],
+      currentTeam: 0,
+      id: 0,
+      name: "",
+      city: "",
+      country: "",
+      yearOfEstablished: 0,
+      inCurrentSeason: true,
+      players: []
     };
     return _this;
   }
@@ -64,6 +78,103 @@ function (_Component) {
       });
     }
   }, {
+    key: "fetchTeams",
+    value: function () {
+      var _fetchTeams = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee() {
+        var values;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return _axios.default.get("http://localhost:3001/api/team").then(function (response) {
+                  return response.data;
+                });
+
+              case 2:
+                values = _context.sent;
+                this.setState({
+                  teams: values
+                });
+
+              case 4:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function fetchTeams() {
+        return _fetchTeams.apply(this, arguments);
+      }
+
+      return fetchTeams;
+    }()
+  }, {
+    key: "handleInput",
+    value: function () {
+      var _handleInput = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee2(event) {
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                this.setState(_defineProperty({}, event.target.value, event.target.value));
+
+              case 1:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      function handleInput(_x) {
+        return _handleInput.apply(this, arguments);
+      }
+
+      return handleInput;
+    }()
+  }, {
+    key: "handleSubmit",
+    value: function () {
+      var _handleSubmit = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee3(event) {
+        var team;
+        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                event.preventDefault();
+                team = new _Team.default(this.state.id, this.state.name, this.state.city, this.state.country, this.state.yearOfEstablished, this.state.inCurrentSeason, this.state.players);
+                _context3.next = 4;
+                return _axios.default.post("http://localhost:3001/api/team", team).then(function (response) {
+                  return response.data;
+                });
+
+              case 4:
+                this.fetchTeams();
+
+              case 5:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+
+      function handleSubmit(_x2) {
+        return _handleSubmit.apply(this, arguments);
+      }
+
+      return handleSubmit;
+    }()
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       var _this2 = this;
@@ -71,6 +182,7 @@ function (_Component) {
       this.timerId = setInterval(function () {
         return _this2.tick();
       }, 3000);
+      this.fetchTeams();
     }
   }, {
     key: "componentWillUnmount",
@@ -86,6 +198,16 @@ function (_Component) {
         teams: this.state.teams
       }), _react.default.createElement(_TeamDetailsBox.default, {
         team: this.state.teams[this.state.currentTeam]
+      }), _react.default.createElement(_AddTeamBox.default, {
+        id: this.state.id,
+        name: this.state.name,
+        city: this.state.city,
+        country: this.state.country,
+        yearOfEstablished: this.state.yearOfEstablished,
+        inCurrentSeason: this.state.inCurrentSeason,
+        players: this.state.players,
+        onInput: this.handleInput.bind(this),
+        onSubmit: this.handleSubmit.bind(this)
       }));
     }
   }]);

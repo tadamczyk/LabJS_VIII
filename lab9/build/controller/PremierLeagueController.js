@@ -4,6 +4,8 @@ var _express = _interopRequireDefault(require("express"));
 
 var _bodyParser = _interopRequireDefault(require("body-parser"));
 
+var _cors = _interopRequireDefault(require("cors"));
+
 var _PremierLeagueService = _interopRequireDefault(require("../service/PremierLeagueService"));
 
 var _FakePremierLeague = require("../fake/FakePremierLeague");
@@ -13,6 +15,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var service = new _PremierLeagueService.default();
 var host = new _express.default();
 var port = 3001;
+host.use((0, _cors.default)());
 host.use(_bodyParser.default.json());
 service.teams = _FakePremierLeague.fakeTeams;
 host.listen(port, function () {
@@ -32,12 +35,6 @@ host.get("/api/team", function (request, response) {
 host.get("/api/team/:id", function (request, response) {
   var id = parseInt(request.params.id);
   var team = service.getById(id);
-  response.header("Content-Type", "application/json");
-  response.send(JSON.stringify(team, null, 2));
-});
-host.get("/api/team/:name", function (request, response) {
-  var name = parseInt(request.params.name);
-  var team = service.getByName(name);
   response.header("Content-Type", "application/json");
   response.send(JSON.stringify(team, null, 2));
 });

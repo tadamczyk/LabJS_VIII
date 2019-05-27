@@ -45,9 +45,11 @@ function (_Component) {
 
       return _react.default.createElement("div", {
         className: "teamDetails"
-      }, _react.default.createElement("h3", null, "Team Details"), _react.default.createElement("p", null, Object.keys(this.props.team).map(function (field) {
-        return _react.default.createElement("p", null, field, ": ", _this.props.team[field]);
-      })));
+      }, _react.default.createElement("h3", null, "Team Details"), this.props.team ? _react.default.createElement("div", null, Object.keys(this.props.team).map(function (field) {
+        return _react.default.createElement("p", {
+          key: field
+        }, field, ": ", _this.props.team[field]);
+      })) : _react.default.createElement("div", null));
     }
   }]);
 

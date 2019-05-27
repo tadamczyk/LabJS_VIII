@@ -27,31 +27,46 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var TeamsBox =
+var AddTeamBox =
 /*#__PURE__*/
 function (_Component) {
-  _inherits(TeamsBox, _Component);
+  _inherits(AddTeamBox, _Component);
 
-  function TeamsBox() {
-    _classCallCheck(this, TeamsBox);
+  function AddTeamBox() {
+    _classCallCheck(this, AddTeamBox);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(TeamsBox).apply(this, arguments));
+    return _possibleConstructorReturn(this, _getPrototypeOf(AddTeamBox).apply(this, arguments));
   }
 
-  _createClass(TeamsBox, [{
+  _createClass(AddTeamBox, [{
     key: "render",
     value: function render() {
       return _react.default.createElement("div", {
-        className: "teams"
-      }, _react.default.createElement("h3", null, "Premier League Teams"), _react.default.createElement("ol", null, this.props.teams.map(function (team) {
-        return _react.default.createElement("li", {
-          key: team.id
-        }, team.name, " ", team.city, ", ", team.country);
-      })));
+        className: "addTeam"
+      }, _react.default.createElement("h3", null, "Add Team to Premier League"), _react.default.createElement("form", {
+        onSubmit: this.props.onSubmit,
+        onChange: this.props.onInput
+      }, _react.default.createElement("label", null, "Id:"), _react.default.createElement("input", {
+        name: this.props.id,
+        defaultValue: this.props.id
+      }), _react.default.createElement("br", null), _react.default.createElement("label", null, "Name:"), _react.default.createElement("input", {
+        name: this.props.name,
+        defaultValue: this.props.name
+      }), _react.default.createElement("br", null), _react.default.createElement("label", null, "City:"), _react.default.createElement("input", {
+        name: this.props.city
+      }), _react.default.createElement("br", null), _react.default.createElement("label", null, "Country:"), _react.default.createElement("input", {
+        name: this.props.country
+      }), _react.default.createElement("br", null), _react.default.createElement("label", null, "Year of established:"), _react.default.createElement("input", {
+        name: this.props.yearOfEstablished
+      }), _react.default.createElement("br", null), _react.default.createElement("label", null, "In current season?:"), _react.default.createElement("input", {
+        name: this.props.inCurrentSeason
+      }), _react.default.createElement("br", null), _react.default.createElement("label", null, "Players:"), _react.default.createElement("input", {
+        name: this.props.players
+      }), _react.default.createElement("br", null), _react.default.createElement("button", null, "Submit")));
     }
   }]);
 
-  return TeamsBox;
+  return AddTeamBox;
 }(_react.Component);
 
-exports.default = TeamsBox;
+exports.default = AddTeamBox;
