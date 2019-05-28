@@ -12,3 +12,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.premierLeague {
+  border: solid 2px grey;
+  background-color: whitesmoke;
+  width: 80%;
+  margin: 10pt;
+  padding: 20pt;
+  text-align: left;
+}

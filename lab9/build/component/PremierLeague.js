@@ -17,6 +17,8 @@ var _TeamsBox = _interopRequireDefault(require("./TeamsBox"));
 
 var _TeamDetailsBox = _interopRequireDefault(require("./TeamDetailsBox"));
 
+require("../index.css");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
@@ -24,6 +26,14 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
@@ -59,7 +69,6 @@ function (_Component) {
     _this.state = {
       teams: [],
       currentTeam: 0,
-      id: 0,
       name: "",
       city: "",
       country: "",
@@ -114,6 +123,13 @@ function (_Component) {
       return fetchTeams;
     }()
   }, {
+    key: "getNextId",
+    value: function getNextId() {
+      return Math.max.apply(Math, _toConsumableArray(this.state.teams.map(function (team) {
+        return team.id;
+      }))) + 1;
+    }
+  }, {
     key: "handleInput",
     value: function () {
       var _handleInput = _asyncToGenerator(
@@ -123,9 +139,10 @@ function (_Component) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                this.setState(_defineProperty({}, event.target.value, event.target.value));
+                _context2.next = 2;
+                return this.setState(_defineProperty({}, event.target.name, event.target.value));
 
-              case 1:
+              case 2:
               case "end":
                 return _context2.stop();
             }
@@ -151,7 +168,7 @@ function (_Component) {
             switch (_context3.prev = _context3.next) {
               case 0:
                 event.preventDefault();
-                team = new _Team.default(this.state.id, this.state.name, this.state.city, this.state.country, this.state.yearOfEstablished, this.state.inCurrentSeason, this.state.players);
+                team = new _Team.default(this.getNextId(), this.state.name, this.state.city, this.state.country, this.state.yearOfEstablished, this.state.inCurrentSeason, this.state.players);
                 _context3.next = 4;
                 return _axios.default.post("http://localhost:3001/api/team", team).then(function (response) {
                   return response.data;
@@ -199,7 +216,6 @@ function (_Component) {
       }), _react.default.createElement(_TeamDetailsBox.default, {
         team: this.state.teams[this.state.currentTeam]
       }), _react.default.createElement(_AddTeamBox.default, {
-        id: this.state.id,
         name: this.state.name,
         city: this.state.city,
         country: this.state.country,

@@ -39,6 +39,29 @@ function (_Component) {
   }
 
   _createClass(TeamDetailsBox, [{
+    key: "renderFieldValue",
+    value: function renderFieldValue(field) {
+      return field === true || field === "true" ? "Yes" : field === false || field === "false" ? "No" : Array.isArray(field) ? field.map(function (value) {
+        return value;
+      }).join(", ") : field;
+    }
+  }, {
+    key: "renderFieldLabel",
+    value: function renderFieldLabel(field) {
+      switch (field) {
+        case "yearOfEstablished":
+          return "Year Of Established";
+
+        case "inCurrentSeason":
+          return "In Current Season?";
+
+        default:
+          return field.charAt(0).toUpperCase() + field.slice(1);
+      }
+
+      ;
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this = this;
@@ -48,7 +71,7 @@ function (_Component) {
       }, _react.default.createElement("h3", null, "Team Details"), this.props.team ? _react.default.createElement("div", null, Object.keys(this.props.team).map(function (field) {
         return _react.default.createElement("p", {
           key: field
-        }, field, ": ", _this.props.team[field]);
+        }, _this.renderFieldLabel(field), ": ", _this.renderFieldValue(_this.props.team[field]));
       })) : _react.default.createElement("div", null));
     }
   }]);

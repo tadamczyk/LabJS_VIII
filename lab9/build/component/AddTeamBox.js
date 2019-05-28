@@ -44,25 +44,45 @@ function (_Component) {
       return _react.default.createElement("div", {
         className: "addTeam"
       }, _react.default.createElement("h3", null, "Add Team to Premier League"), _react.default.createElement("form", {
-        onSubmit: this.props.onSubmit,
+        className: "form-inline",
+        onSubmit: this.props.onSubmit
+      }, _react.default.createElement("div", {
+        className: "form-group"
+      }, _react.default.createElement("label", null, "Name:"), _react.default.createElement("input", {
+        name: "name",
+        value: this.props.name,
         onChange: this.props.onInput
-      }, _react.default.createElement("label", null, "Id:"), _react.default.createElement("input", {
-        name: this.props.id,
-        defaultValue: this.props.id
-      }), _react.default.createElement("br", null), _react.default.createElement("label", null, "Name:"), _react.default.createElement("input", {
-        name: this.props.name,
-        defaultValue: this.props.name
-      }), _react.default.createElement("br", null), _react.default.createElement("label", null, "City:"), _react.default.createElement("input", {
-        name: this.props.city
-      }), _react.default.createElement("br", null), _react.default.createElement("label", null, "Country:"), _react.default.createElement("input", {
-        name: this.props.country
-      }), _react.default.createElement("br", null), _react.default.createElement("label", null, "Year of established:"), _react.default.createElement("input", {
-        name: this.props.yearOfEstablished
-      }), _react.default.createElement("br", null), _react.default.createElement("label", null, "In current season?:"), _react.default.createElement("input", {
-        name: this.props.inCurrentSeason
-      }), _react.default.createElement("br", null), _react.default.createElement("label", null, "Players:"), _react.default.createElement("input", {
-        name: this.props.players
-      }), _react.default.createElement("br", null), _react.default.createElement("button", null, "Submit")));
+      })), _react.default.createElement("div", {
+        className: "form-group"
+      }, _react.default.createElement("label", null, "City:"), _react.default.createElement("input", {
+        name: "city",
+        value: this.props.city,
+        onChange: this.props.onInput
+      })), _react.default.createElement("div", {
+        className: "form-group"
+      }, _react.default.createElement("label", null, "Country:"), _react.default.createElement("input", {
+        name: "country",
+        value: this.props.country,
+        onChange: this.props.onInput
+      })), _react.default.createElement("div", {
+        className: "form-group"
+      }, _react.default.createElement("label", null, "Year of established:"), _react.default.createElement("input", {
+        name: "yearOfEstablished",
+        value: this.props.yearOfEstablished,
+        onChange: this.props.onInput
+      })), _react.default.createElement("div", {
+        className: "form-group"
+      }, _react.default.createElement("label", null, "In current season?:"), _react.default.createElement("input", {
+        name: "inCurrentSeason",
+        value: this.props.inCurrentSeason,
+        onChange: this.props.onInput
+      })), _react.default.createElement("div", {
+        className: "form-group"
+      }, _react.default.createElement("label", null, "Players:"), _react.default.createElement("input", {
+        name: "players",
+        value: this.props.players,
+        onChange: this.props.onInput
+      })), _react.default.createElement("button", null, "Submit")));
     }
   }]);
 

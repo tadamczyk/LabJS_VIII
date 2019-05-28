@@ -4,6 +4,7 @@ import AddTeamBox from "./AddTeamBox";
 import Team from "../domain/Team";
 import TeamsBox from "./TeamsBox";
 import TeamDetailsBox from "./TeamDetailsBox";
+import "../index.css";
 
 export default class PremierLeague extends Component {
   constructor(props) {
@@ -12,11 +13,10 @@ export default class PremierLeague extends Component {
     this.state = {
       teams: [],
       currentTeam: 0,
-      id: 0,
       name: "",
       city: "",
       country: "",
-      yearOfEstablished: 0,
+      yearOfEstablished: null,
       inCurrentSeason: true,
       players: []
     };
@@ -26,6 +26,10 @@ export default class PremierLeague extends Component {
     this.setState({ currentTeam: (this.state.currentTeam + 1) % this.state.teams.length });
   };
 
+  getNextId() {
+    return Math.max(...this.state.teams.map(team => team.id)) + 1;
+  }
+
   async fetchTeams() {
     const values = await Axios.get("http://localhost:3001/api/team")
       .then(response => response.data);
@@ -34,15 +38,29 @@ export default class PremierLeague extends Component {
   }
 
   async handleInput(event) {
-    this.setState({ [event.target.name]: event.target.value });
+    event.target.name !== "inCurrentSeason"
+      ? await this.setState({ [event.target.name]: event.target.value })
+      : await this.setState({ inCurrentSeason: !this.state.inCurrentSeason });
   }
 
   async handleSubmit(event) {
     event.preventDefault();
-    const team = new Team(this.state.id, this.state.name, this.state.city, this.state.country, this.state.yearOfEstablished, this.state.inCurrentSeason, this.state.players);
+    const team = new Team(this.getNextId(), this.state.name, this.state.city, this.state.country, this.state.yearOfEstablished, this.state.inCurrentSeason, this.state.players);
     await Axios.post("http://localhost:3001/api/team", team)
       .then(response => response.data);
     this.fetchTeams();
+    this.clearForm();
+  }
+
+  async clearForm() {
+    this.setState({
+      name: "",
+      city: "",
+      country: "",
+      yearOfEstablished: null,
+      inCurrentSeason: true,
+      players: []
+    })
   }
 
   componentDidMount() {
@@ -60,8 +78,7 @@ export default class PremierLeague extends Component {
       <div className="premierLeague">
         <TeamsBox teams={this.state.teams} />
         <TeamDetailsBox team={this.state.teams[this.state.currentTeam]} />
-        <AddTeamBox id={this.state.id}
-          name={this.state.name}
+        <AddTeamBox name={this.state.name}
           city={this.state.city}
           country={this.state.country}
           yearOfEstablished={this.state.yearOfEstablished}
