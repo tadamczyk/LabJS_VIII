@@ -7,11 +7,7 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _reactRouterDom = require("react-router-dom");
-
 var _axios = _interopRequireDefault(require("axios"));
-
-var _About = _interopRequireDefault(require("./About"));
 
 var _AddTeamBox = _interopRequireDefault(require("./AddTeamBox"));
 
@@ -151,18 +147,17 @@ function (_Component) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                event.preventDefault();
                 team = new _Team.default(this.getNextId(), this.state.name, this.state.city, this.state.country, this.state.yearOfEstablished, this.state.inCurrentSeason, this.state.players);
-                _context2.next = 4;
+                _context2.next = 3;
                 return _axios.default.post("http://localhost:3001/api/team", team).then(function (response) {
                   return response.data;
                 });
 
-              case 4:
+              case 3:
                 this.fetchTeams();
                 this.clearForm();
 
-              case 6:
+              case 5:
               case "end":
                 return _context2.stop();
             }
@@ -196,14 +191,7 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      return _react.default.createElement("div", null, _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement("div", null, _react.default.createElement("ul", null, _react.default.createElement("li", null, _react.default.createElement(_reactRouterDom.Link, {
-        to: "/"
-      }, "Premier League")), _react.default.createElement("li", null, _react.default.createElement(_reactRouterDom.Link, {
-        to: "/about"
-      }, "About")))), _react.default.createElement(_reactRouterDom.Route, {
-        path: "/about",
-        component: _About.default
-      })), _react.default.createElement("div", {
+      return _react.default.createElement("div", {
         className: "premierLeague"
       }, _react.default.createElement(_TeamsBox.default, {
         teams: this.state.teams,
@@ -211,7 +199,6 @@ function (_Component) {
       }), _react.default.createElement(_TeamDetailsBox.default, {
         team: this.state.teams[this.state.currentTeam]
       }), _react.default.createElement(_AddTeamBox.default, {
-        team: this.state.currentTeam,
         name: this.state.name,
         city: this.state.city,
         country: this.state.country,
@@ -220,7 +207,7 @@ function (_Component) {
         players: this.state.players,
         onInput: this.handleInput.bind(this),
         onSubmit: this.handleSave.bind(this)
-      })));
+      }));
     }
   }]);
 

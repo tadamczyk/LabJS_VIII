@@ -57,7 +57,7 @@ export default class PremierLeague extends Component {
       name: "",
       city: "",
       country: "",
-      yearOfEstablished: null,
+      yearOfEstablished: "",
       inCurrentSeason: true,
       players: []
     })

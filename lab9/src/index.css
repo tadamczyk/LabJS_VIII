@@ -1,6 +1,6 @@
 body {
-  margin: 10pt;
-  padding: 10pt;
+  margin: 10pt 10pt;
+  padding: 10pt 10pt;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -18,4 +18,11 @@ code {
 .routing {
   border: solid 1px black;
   background-color: lightblue;
+  overflow: hidden;
+  padding-bottom: 10pt;
+}
+
+.routing li {
+  float: left;
+  width: 33%;
 }
