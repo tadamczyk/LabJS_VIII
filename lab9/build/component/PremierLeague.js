@@ -7,7 +7,11 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _reactRouterDom = require("react-router-dom");
+
 var _axios = _interopRequireDefault(require("axios"));
+
+var _About = _interopRequireDefault(require("./About"));
 
 var _AddTeamBox = _interopRequireDefault(require("./AddTeamBox"));
 
@@ -68,25 +72,18 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(PremierLeague).call(this, props));
     _this.state = {
       teams: [],
-      currentTeam: 0,
       name: "",
       city: "",
       country: "",
-      yearOfEstablished: 0,
+      yearOfEstablished: null,
       inCurrentSeason: true,
-      players: []
+      players: [],
+      currentTeam: null
     };
     return _this;
   }
 
   _createClass(PremierLeague, [{
-    key: "tick",
-    value: function tick() {
-      this.setState({
-        currentTeam: (this.state.currentTeam + 1) % this.state.teams.length
-      });
-    }
-  }, {
     key: "fetchTeams",
     value: function () {
       var _fetchTeams = _asyncToGenerator(
@@ -130,19 +127,42 @@ function (_Component) {
       }))) + 1;
     }
   }, {
+    key: "handleSelectionChange",
+    value: function handleSelectionChange(value) {
+      this.setState({
+        currentTeam: value
+      });
+    }
+  }, {
     key: "handleInput",
+    value: function handleInput(event) {
+      event.target.name !== "inCurrentSeason" ? this.setState(_defineProperty({}, event.target.name, event.target.value)) : this.setState({
+        inCurrentSeason: !this.state.inCurrentSeason
+      });
+    }
+  }, {
+    key: "handleSave",
     value: function () {
-      var _handleInput = _asyncToGenerator(
+      var _handleSave = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee2(event) {
+        var team;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                _context2.next = 2;
-                return this.setState(_defineProperty({}, event.target.name, event.target.value));
+                event.preventDefault();
+                team = new _Team.default(this.getNextId(), this.state.name, this.state.city, this.state.country, this.state.yearOfEstablished, this.state.inCurrentSeason, this.state.players);
+                _context2.next = 4;
+                return _axios.default.post("http://localhost:3001/api/team", team).then(function (response) {
+                  return response.data;
+                });
 
-              case 2:
+              case 4:
+                this.fetchTeams();
+                this.clearForm();
+
+              case 6:
               case "end":
                 return _context2.stop();
             }
@@ -150,72 +170,48 @@ function (_Component) {
         }, _callee2, this);
       }));
 
-      function handleInput(_x) {
-        return _handleInput.apply(this, arguments);
+      function handleSave(_x) {
+        return _handleSave.apply(this, arguments);
       }
 
-      return handleInput;
+      return handleSave;
     }()
   }, {
-    key: "handleSubmit",
-    value: function () {
-      var _handleSubmit = _asyncToGenerator(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee3(event) {
-        var team;
-        return regeneratorRuntime.wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                event.preventDefault();
-                team = new _Team.default(this.getNextId(), this.state.name, this.state.city, this.state.country, this.state.yearOfEstablished, this.state.inCurrentSeason, this.state.players);
-                _context3.next = 4;
-                return _axios.default.post("http://localhost:3001/api/team", team).then(function (response) {
-                  return response.data;
-                });
-
-              case 4:
-                this.fetchTeams();
-
-              case 5:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3, this);
-      }));
-
-      function handleSubmit(_x2) {
-        return _handleSubmit.apply(this, arguments);
-      }
-
-      return handleSubmit;
-    }()
+    key: "clearForm",
+    value: function clearForm() {
+      this.setState({
+        name: "",
+        city: "",
+        country: "",
+        yearOfEstablished: null,
+        inCurrentSeason: true,
+        players: []
+      });
+    }
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      var _this2 = this;
-
-      this.timerId = setInterval(function () {
-        return _this2.tick();
-      }, 3000);
       this.fetchTeams();
-    }
-  }, {
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      clearInterval(this.timerId);
     }
   }, {
     key: "render",
     value: function render() {
-      return _react.default.createElement("div", {
+      return _react.default.createElement("div", null, _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement("div", null, _react.default.createElement("ul", null, _react.default.createElement("li", null, _react.default.createElement(_reactRouterDom.Link, {
+        to: "/"
+      }, "Premier League")), _react.default.createElement("li", null, _react.default.createElement(_reactRouterDom.Link, {
+        to: "/about"
+      }, "About")))), _react.default.createElement(_reactRouterDom.Route, {
+        path: "/about",
+        component: _About.default
+      })), _react.default.createElement("div", {
         className: "premierLeague"
       }, _react.default.createElement(_TeamsBox.default, {
-        teams: this.state.teams
+        teams: this.state.teams,
+        selectionHandler: this.handleSelectionChange.bind(this)
       }), _react.default.createElement(_TeamDetailsBox.default, {
         team: this.state.teams[this.state.currentTeam]
       }), _react.default.createElement(_AddTeamBox.default, {
+        team: this.state.currentTeam,
         name: this.state.name,
         city: this.state.city,
         country: this.state.country,
@@ -223,8 +219,8 @@ function (_Component) {
         inCurrentSeason: this.state.inCurrentSeason,
         players: this.state.players,
         onInput: this.handleInput.bind(this),
-        onSubmit: this.handleSubmit.bind(this)
-      }));
+        onSubmit: this.handleSave.bind(this)
+      })));
     }
   }]);
 

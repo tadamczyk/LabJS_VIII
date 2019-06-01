@@ -1,5 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import PremierLeague from "./component/PremierLeague.jsx";
+import PremierLeaguePage from "./component/PremierLeaguePage";
 
-ReactDOM.render(<PremierLeague />, document.getElementById("root"));
+ReactDOM.render(<PremierLeaguePage />, document.getElementById("root"));

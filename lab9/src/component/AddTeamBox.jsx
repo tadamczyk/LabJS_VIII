@@ -30,7 +30,7 @@ export default class AddTeamBox extends Component {
             <label>Players:</label>
             <input name="players" value={this.props.players} onChange={this.props.onInput} />
           </div>
-          <button>Submit</button>
+          <button>Save</button>
         </form>
       </div>
     );

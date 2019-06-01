@@ -27,8 +27,11 @@ export default class TeamDetailsBox extends Component {
       <div className="teamDetails">
         <h3>Team Details</h3>
         {this.props.team
-          ? <div>{Object.keys(this.props.team).map(field => <p key={field}>{this.renderFieldLabel(field)}: {this.renderFieldValue(this.props.team[field])}</p>)}</div>
-          : <div />}
+          ? <div>{Object.keys(this.props.team).map(field => field !== "id" ?
+            <p key={field}>{this.renderFieldLabel(field)}: {this.renderFieldValue(this.props.team[field])}</p>
+            : null)}
+          </div>
+          : null}
       </div>
     );
   };

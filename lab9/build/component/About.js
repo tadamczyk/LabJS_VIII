@@ -27,68 +27,27 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var AddTeamBox =
+var About =
 /*#__PURE__*/
 function (_Component) {
-  _inherits(AddTeamBox, _Component);
+  _inherits(About, _Component);
 
-  function AddTeamBox() {
-    _classCallCheck(this, AddTeamBox);
+  function About() {
+    _classCallCheck(this, About);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(AddTeamBox).apply(this, arguments));
+    return _possibleConstructorReturn(this, _getPrototypeOf(About).apply(this, arguments));
   }
 
-  _createClass(AddTeamBox, [{
+  _createClass(About, [{
     key: "render",
     value: function render() {
       return _react.default.createElement("div", {
-        className: "addTeam"
-      }, _react.default.createElement("h3", null, "Add Team to Premier League"), _react.default.createElement("form", {
-        className: "form-inline",
-        onSubmit: this.props.onSubmit
-      }, _react.default.createElement("div", {
-        className: "form-group"
-      }, _react.default.createElement("label", null, "Name:"), _react.default.createElement("input", {
-        name: "name",
-        value: this.props.name,
-        onChange: this.props.onInput
-      })), _react.default.createElement("div", {
-        className: "form-group"
-      }, _react.default.createElement("label", null, "City:"), _react.default.createElement("input", {
-        name: "city",
-        value: this.props.city,
-        onChange: this.props.onInput
-      })), _react.default.createElement("div", {
-        className: "form-group"
-      }, _react.default.createElement("label", null, "Country:"), _react.default.createElement("input", {
-        name: "country",
-        value: this.props.country,
-        onChange: this.props.onInput
-      })), _react.default.createElement("div", {
-        className: "form-group"
-      }, _react.default.createElement("label", null, "Year of established:"), _react.default.createElement("input", {
-        name: "yearOfEstablished",
-        value: this.props.yearOfEstablished,
-        onChange: this.props.onInput
-      })), _react.default.createElement("div", {
-        className: "form-group"
-      }, _react.default.createElement("label", null, "In current season?:"), _react.default.createElement("input", {
-        name: "inCurrentSeason",
-        type: "checkbox",
-        defaultChecked: true,
-        value: this.props.inCurrentSeason,
-        onChange: this.props.onInput
-      })), _react.default.createElement("div", {
-        className: "form-group"
-      }, _react.default.createElement("label", null, "Players:"), _react.default.createElement("input", {
-        name: "players",
-        value: this.props.players,
-        onChange: this.props.onInput
-      })), _react.default.createElement("button", null, "Save")));
+        className: "about"
+      }, _react.default.createElement("h3", null, "Tomasz Adamczyk - tadamczyk"), _react.default.createElement("h4", null, "tadamczyk@sigma.ug.edu.pl"), _react.default.createElement("h4", null, "github.com/tadamczyk"));
     }
   }]);
 
-  return AddTeamBox;
+  return About;
 }(_react.Component);
 
-exports.default = AddTeamBox;
+exports.default = About;

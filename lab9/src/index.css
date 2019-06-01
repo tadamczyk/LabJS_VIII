@@ -1,11 +1,13 @@
 body {
-  margin: 0;
-  padding: 0;
+  margin: 10pt;
+  padding: 10pt;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  border: solid 2px grey;
+  background-color: whitesmoke;
 }
 
 code {
@@ -13,11 +15,7 @@ code {
     monospace;
 }
 
-.premierLeague {
-  border: solid 2px grey;
-  background-color: whitesmoke;
-  width: 80%;
-  margin: 10pt;
-  padding: 20pt;
-  text-align: left;
+.routing {
+  border: solid 1px black;
+  background-color: lightblue;
 }

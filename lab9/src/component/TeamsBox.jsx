@@ -6,7 +6,8 @@ export default class TeamsBox extends Component {
       <div className="teams">
         <h3>Premier League Teams</h3>
         <ol>
-          {this.props.teams.map(team => <li key={team.id}>{team.name} {team.city}, {team.country}</li>)}
+          {this.props.teams.map(team => <li key={team.id}
+            onClick={() => this.props.selectionHandler(this.props.teams.indexOf(team))}>{team.name} {team.city}, {team.country}</li>)}
         </ol>
       </div>
     );

@@ -41,11 +41,16 @@ function (_Component) {
   _createClass(TeamsBox, [{
     key: "render",
     value: function render() {
+      var _this = this;
+
       return _react.default.createElement("div", {
         className: "teams"
       }, _react.default.createElement("h3", null, "Premier League Teams"), _react.default.createElement("ol", null, this.props.teams.map(function (team) {
         return _react.default.createElement("li", {
-          key: team.id
+          key: team.id,
+          onClick: function onClick() {
+            return _this.props.selectionHandler(_this.props.teams.indexOf(team));
+          }
         }, team.name, " ", team.city, ", ", team.country);
       })));
     }
