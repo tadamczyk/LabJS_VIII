@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import About from "./About";
+import Budget from "./Budget";
 import PremierLeague from "./PremierLeague";
 
 export default class PremierLeaguePage extends Component {
@@ -14,12 +15,16 @@ export default class PremierLeaguePage extends Component {
                 <Link to="/">Premier League</Link>
               </li>
               <li>
+                <Link to="/converter">Converter</Link>
+              </li>
+              <li>
                 <Link to="/about">About</Link>
               </li>
             </ul>
           </div>
           <Switch>
             <Route exact path="/" component={PremierLeague} />
+            <Route path="/converter" component={Budget} />
             <Route path="/about" component={About} />
           </Switch>
         </Router>

@@ -147,17 +147,18 @@ function (_Component) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
+                event.preventDefault();
                 team = new _Team.default(this.getNextId(), this.state.name, this.state.city, this.state.country, this.state.yearOfEstablished, this.state.inCurrentSeason, this.state.players);
-                _context2.next = 3;
+                _context2.next = 4;
                 return _axios.default.post("http://localhost:3001/api/team", team).then(function (response) {
                   return response.data;
                 });
 
-              case 3:
+              case 4:
                 this.fetchTeams();
                 this.clearForm();
 
-              case 5:
+              case 6:
               case "end":
                 return _context2.stop();
             }
@@ -178,7 +179,7 @@ function (_Component) {
         name: "",
         city: "",
         country: "",
-        yearOfEstablished: null,
+        yearOfEstablished: "",
         inCurrentSeason: true,
         players: []
       });
