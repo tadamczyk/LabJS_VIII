@@ -7,13 +7,9 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _reactRouterDom = require("react-router-dom");
+var _Cash = _interopRequireDefault(require("./Cash"));
 
-var _About = _interopRequireDefault(require("./About"));
-
-var _Budget = _interopRequireDefault(require("./Budget"));
-
-var _PremierLeague = _interopRequireDefault(require("./PremierLeague"));
+var _Goal = _interopRequireDefault(require("./Goal"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -37,45 +33,58 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var PremierLeaguePage =
+var PRICE_FOR_GOAL = 10000;
+
+var Budget =
 /*#__PURE__*/
 function (_Component) {
-  _inherits(PremierLeaguePage, _Component);
+  _inherits(Budget, _Component);
 
-  function PremierLeaguePage() {
-    _classCallCheck(this, PremierLeaguePage);
+  function Budget(props) {
+    var _this;
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(PremierLeaguePage).apply(this, arguments));
+    _classCallCheck(this, Budget);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Budget).call(this, props));
+    _this.state = {
+      goals: 0,
+      cash: 0
+    };
+    return _this;
   }
 
-  _createClass(PremierLeaguePage, [{
+  _createClass(Budget, [{
+    key: "handleGoalsInput",
+    value: function handleGoalsInput(event) {
+      this.setState({
+        goals: event.target.value,
+        cash: PRICE_FOR_GOAL * event.target.value
+      });
+    }
+  }, {
+    key: "handleCashInput",
+    value: function handleCashInput(event) {
+      this.setState({
+        cash: event.target.value,
+        goals: event.target.value / PRICE_FOR_GOAL
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       return _react.default.createElement("div", {
-        className: "premierLeaguePage"
-      }, _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement("div", {
-        className: "routing"
-      }, _react.default.createElement("ul", null, _react.default.createElement("li", null, _react.default.createElement(_reactRouterDom.Link, {
-        to: "/"
-      }, "Premier League")), _react.default.createElement("li", null, _react.default.createElement(_reactRouterDom.Link, {
-        to: "/converter"
-      }, "Converter")), _react.default.createElement("li", null, _react.default.createElement(_reactRouterDom.Link, {
-        to: "/about"
-      }, "About")))), _react.default.createElement(_reactRouterDom.Switch, null, _react.default.createElement(_reactRouterDom.Route, {
-        exact: true,
-        path: "/",
-        component: _PremierLeague.default
-      }), _react.default.createElement(_reactRouterDom.Route, {
-        path: "/converter",
-        component: _Budget.default
-      }), _react.default.createElement(_reactRouterDom.Route, {
-        path: "/about",
-        component: _About.default
-      }))));
+        className: "converter"
+      }, _react.default.createElement("h3", null, "Budget"), _react.default.createElement(_Goal.default, {
+        goals: this.state.goals,
+        onInput: this.handleGoalsInput.bind(this)
+      }), _react.default.createElement(_Cash.default, {
+        cash: this.state.cash,
+        onInput: this.handleCashInput.bind(this)
+      }));
     }
   }]);
 
-  return PremierLeaguePage;
+  return Budget;
 }(_react.Component);
 
-exports.default = PremierLeaguePage;
+exports.default = Budget;

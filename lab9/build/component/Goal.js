@@ -7,16 +7,6 @@ exports.default = void 0;
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _reactRouterDom = require("react-router-dom");
-
-var _About = _interopRequireDefault(require("./About"));
-
-var _Budget = _interopRequireDefault(require("./Budget"));
-
-var _PremierLeague = _interopRequireDefault(require("./PremierLeague"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -37,45 +27,35 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var PremierLeaguePage =
+var Goal =
 /*#__PURE__*/
 function (_Component) {
-  _inherits(PremierLeaguePage, _Component);
+  _inherits(Goal, _Component);
 
-  function PremierLeaguePage() {
-    _classCallCheck(this, PremierLeaguePage);
+  function Goal() {
+    _classCallCheck(this, Goal);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(PremierLeaguePage).apply(this, arguments));
+    return _possibleConstructorReturn(this, _getPrototypeOf(Goal).apply(this, arguments));
   }
 
-  _createClass(PremierLeaguePage, [{
+  _createClass(Goal, [{
     key: "render",
     value: function render() {
       return _react.default.createElement("div", {
-        className: "premierLeaguePage"
-      }, _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement("div", {
-        className: "routing"
-      }, _react.default.createElement("ul", null, _react.default.createElement("li", null, _react.default.createElement(_reactRouterDom.Link, {
-        to: "/"
-      }, "Premier League")), _react.default.createElement("li", null, _react.default.createElement(_reactRouterDom.Link, {
-        to: "/converter"
-      }, "Converter")), _react.default.createElement("li", null, _react.default.createElement(_reactRouterDom.Link, {
-        to: "/about"
-      }, "About")))), _react.default.createElement(_reactRouterDom.Switch, null, _react.default.createElement(_reactRouterDom.Route, {
-        exact: true,
-        path: "/",
-        component: _PremierLeague.default
-      }), _react.default.createElement(_reactRouterDom.Route, {
-        path: "/converter",
-        component: _Budget.default
-      }), _react.default.createElement(_reactRouterDom.Route, {
-        path: "/about",
-        component: _About.default
+        className: "goal"
+      }, _react.default.createElement("h4", null, "Scored goals:"), _react.default.createElement("form", {
+        className: "form-inline"
+      }, _react.default.createElement("div", {
+        className: "form-group"
+      }, _react.default.createElement("label", null, "Goals:"), _react.default.createElement("input", {
+        name: "goals",
+        value: this.props.goals,
+        onChange: this.props.onInput
       }))));
     }
   }]);
 
-  return PremierLeaguePage;
+  return Goal;
 }(_react.Component);
 
-exports.default = PremierLeaguePage;
+exports.default = Goal;

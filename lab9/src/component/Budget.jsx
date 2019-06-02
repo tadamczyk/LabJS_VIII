@@ -14,15 +14,15 @@ export default class Budget extends Component {
     };
   };
 
-  async handleGoalsInput(event) {
-    await this.setState({
+  handleGoalsInput(event) {
+    this.setState({
       goals: event.target.value,
       cash: PRICE_FOR_GOAL * event.target.value
     });
   }
 
-  async handleCashInput(event) {
-    await this.setState({
+  handleCashInput(event) {
+    this.setState({
       cash: event.target.value,
       goals: event.target.value / PRICE_FOR_GOAL
     });
@@ -30,7 +30,7 @@ export default class Budget extends Component {
 
   render() {
     return (
-      <div className="budget">
+      <div className="converter">
         <h3>Budget</h3>
         <Goal goals={this.state.goals}
           onInput={this.handleGoalsInput.bind(this)} />
